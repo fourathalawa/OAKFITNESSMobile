@@ -1,16 +1,13 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.myapp.utils;
 
 /**
  *
- * @author bhk
+ * @author Heni Nechi
  */
-public class Statics {
-    
+public class statics {
     public static final String BASE_URL="http://127.0.0.1:8000/";
-    
 }

@@ -13,7 +13,7 @@ import com.codename1.io.NetworkManager;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BoxLayout;
 import com.mycompany.myapp.entities.Task;
-import com.mycompany.myapp.utils.Statics;
+import com.mycompany.myapp.utils.statics;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,8 +28,7 @@ import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BoxLayout;
 
 import java.util.ArrayList;
-import com.mycompany.myapp.utils.Statics;
-
+import com.mycompany.myapp.utils.statics;
 
 
 /**
@@ -68,7 +67,7 @@ public class ServiceTask {
     public boolean addTask(Task t) {
         System.out.println(t);
         System.out.println("********");
-       String url = Statics.BASE_URL + "liste/create?publication=" + t.getPublication();
+       String url = statics.BASE_URL + "liste/create?publication=" + t.getPublication();
     
        req.setUrl(url);
        
@@ -126,7 +125,7 @@ c3.add(Delete);
     
     public ArrayList<Task> getAllTasks(){
         //String url = Statics.BASE_URL+"/tasks/";
-        String url = Statics.BASE_URL+"liste/";
+        String url = statics.BASE_URL+"liste/";
         req.setUrl(url);
         req.setPost(false);
         req.addResponseListener(new ActionListener<NetworkEvent>() {
@@ -140,7 +139,7 @@ c3.add(Delete);
         return tasks;
     }
     public boolean Delete(int id) {
-        String url = Statics.BASE_URL + "liste/deleteclub/" + id;
+        String url = statics.BASE_URL + "liste/deleteclub/" + id;
 
         req.setUrl(url);
 
@@ -157,7 +156,7 @@ c3.add(Delete);
 
     }
     public boolean modifierClub(Task event) {
-        String url = Statics.BASE_URL + "liste/modifier/" + event.getPublication()+"/"+event.getIdpublication();
+        String url = statics.BASE_URL + "liste/modifier/" + event.getPublication()+"/"+event.getIdpublication();
         req.setUrl(url);
         req.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override

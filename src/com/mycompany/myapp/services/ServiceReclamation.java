@@ -13,7 +13,7 @@ import com.codename1.io.NetworkManager;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BoxLayout;
 import com.mycompany.myapp.entities.Task;
-import com.mycompany.myapp.utils.Statics;
+import com.mycompany.myapp.utils.statics;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +30,7 @@ import com.mycompany.myapp.entities.Commentaire;
 import com.mycompany.myapp.entities.Reclamation;
 
 import java.util.ArrayList;
-import com.mycompany.myapp.utils.Statics;
+import com.mycompany.myapp.utils.statics;
 
 
 
@@ -70,7 +70,7 @@ public class ServiceReclamation {
     public boolean addReclam(Reclamation t) {
         System.out.println(t);
         System.out.println("********");
-       String url = Statics.BASE_URL + "liste/addreclam/"+t.getCommentairerec()+"/" + t.getDescrreclam()+"/"+t.getIdcommentreclam();
+       String url = statics.BASE_URL + "liste/addreclam/"+t.getCommentairerec()+"/" + t.getDescrreclam()+"/"+t.getIdcommentreclam();
     
        req.setUrl(url);
        req.addResponseListener(new ActionListener<NetworkEvent>() {
@@ -117,7 +117,7 @@ public class ServiceReclamation {
     
     public ArrayList<Reclamation> getAllReclamations(int id){
         //String url = Statics.BASE_URL+"/tasks/";
-        String url = Statics.BASE_URL+"liste/reclam";
+        String url = statics.BASE_URL+"liste/reclam";
         req.setUrl(url);
         req.setPost(false);
         req.addResponseListener(new ActionListener<NetworkEvent>() {
@@ -131,7 +131,7 @@ public class ServiceReclamation {
         return tasks;
     }
     public boolean Delete(int id) {
-        String url = Statics.BASE_URL + "liste/deletecomment/" + id;
+        String url = statics.BASE_URL + "liste/deletecomment/" + id;
 
         req.setUrl(url);
 

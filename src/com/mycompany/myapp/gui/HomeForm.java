@@ -32,6 +32,64 @@ Form current;
         btnListReport.addActionListener(e-> new ListReport(current).show());
 
         addAll(btnAddTask,btnListTasks,btnListReport);
+       current = this; //Récupération de l'interface(Form) en cours
+    int session = 0;
+    
+        setTitle("Home");
+        setLayout(BoxLayout.y());
+        
+        Button btnListEvents = new Button("List Events");
+        Button btnAddTrans = new Button("Transformation");
+        Button btnAddshop = new Button(" Products");
+
+        if(session==0){
+        btnListEvents.addActionListener(e -> new ListEventsForm(current).show());
+        }else{
+        btnListEvents.addActionListener(e -> {
+            new ListEvents(current).show();
+        });
+        }
+
+       if(session==0){
+         btnAddshop.addActionListener(e -> new Listproduit(current).show());
+        }else{
+        btnAddshop.addActionListener(e -> new Listproduitfront(current).show());
+        }
+ if(session==0){
+         btnAddTrans.addActionListener(e -> new listtransformation(current).show());
+        }else{
+        btnAddTrans.addActionListener(e -> new listtransformationfront(current).show());
+        }
+
+
+        add(btnAddshop);
+        add(btnAddTrans);
+
+
+
+        add(btnListEvents);
+        
+        
+        
+        
+        Button btnListReaps = new Button("List Meals");
+        if(session==0){
+        btnListReaps.addActionListener(e -> new ListRepasForm(current).show());
+        }else{
+        btnListReaps.addActionListener(e -> new ListRepas(current).show());
+        }
+        add(btnListReaps);
+        
+         
+         
+        Button btnListExercice = new Button("List Exercice");
+        if(session==0){
+        btnListExercice.addActionListener(e -> new ListExerciceForm(current).show());
+        }
+        else{
+        btnListExercice.addActionListener(e -> new ListExercice(current).show());
+        }
+        add(btnListExercice);
         
         
     }

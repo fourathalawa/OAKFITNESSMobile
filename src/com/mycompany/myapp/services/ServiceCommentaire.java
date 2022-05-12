@@ -13,7 +13,7 @@ import com.codename1.io.NetworkManager;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BoxLayout;
 import com.mycompany.myapp.entities.Task;
-import com.mycompany.myapp.utils.Statics;
+import com.mycompany.myapp.utils.statics;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,7 @@ import com.codename1.ui.layouts.BoxLayout;
 import com.mycompany.myapp.entities.Commentaire;
 
 import java.util.ArrayList;
-import com.mycompany.myapp.utils.Statics;
+import com.mycompany.myapp.utils.statics;
 
 
 
@@ -69,7 +69,7 @@ public class ServiceCommentaire {
     public boolean addCommentaire(Commentaire t) {
         System.out.println(t);
         System.out.println("********");
-       String url = Statics.BASE_URL + "liste/createcomm/"+t.getIdpublication()+"/?commentaire=" + t.getCommentaire();
+       String url = statics.BASE_URL + "liste/createcomm/"+t.getIdpublication()+"/?commentaire=" + t.getCommentaire();
     
        req.setUrl(url);
        
@@ -126,7 +126,7 @@ c3.add(Delete);
     
     public ArrayList<Commentaire> getAllTasks(int id){
         //String url = Statics.BASE_URL+"/tasks/";
-        String url = Statics.BASE_URL+"liste/comment/"+id;
+        String url = statics.BASE_URL+"liste/comment/"+id;
         req.setUrl(url);
         req.setPost(false);
         req.addResponseListener(new ActionListener<NetworkEvent>() {
@@ -140,7 +140,7 @@ c3.add(Delete);
         return tasks;
     }
     public boolean Delete(int id) {
-        String url = Statics.BASE_URL + "liste/deletecomment/" + id;
+        String url = statics.BASE_URL + "liste/deletecomment/" + id;
 
         req.setUrl(url);
 
@@ -157,7 +157,7 @@ c3.add(Delete);
 
     }
     public boolean modifieComment(Commentaire c) {
-        String url = Statics.BASE_URL + "liste/modifierC/" + c.getCommentaire()+"/"+c.getIdcommentaire();
+        String url = statics.BASE_URL + "liste/modifierC/" + c.getCommentaire()+"/"+c.getIdcommentaire();
         req.setUrl(url);
         req.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override
