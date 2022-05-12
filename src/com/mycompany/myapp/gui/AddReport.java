@@ -4,7 +4,6 @@
  */
 package com.mycompany.myapp.gui;
 
-import com.codename1.components.ToastBar;
 import com.codename1.ui.Button;
 import com.codename1.ui.Display;
 import com.codename1.ui.FontImage;
@@ -22,6 +21,8 @@ import com.codename1.ui.events.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import com.codename1.ui.events.ActionListener;
+import com.mycompany.myapp.entities.Commentaire;
+import com.mycompany.myapp.services.ServiceCommentaire;
 import java.text.ParseException;
 
 
@@ -31,10 +32,10 @@ import java.text.ParseException;
  *
  * @author Heni Nechi
  */
-public class updateClub extends Form {
+public class AddReport extends Form {
     Form current;
     TextField tf_creator,tf_titre,tf_descr,tf_adresse,tf_type;
-    public updateClub(Task e,Form previous)
+    public AddReport(Commentaire e,Form previous)
     {
        super(BoxLayout.y());
      
@@ -44,34 +45,24 @@ public class updateClub extends Form {
         getContentPane().setScrollVisible(false);
         
         
-        tf_creator=new TextField(e.getPublication(),"creator");
+        tf_creator=new TextField(e.getCommentaire(),"creator");
+
        
         Picker tf_date = new Picker();
        
         Button btnadd=new Button("Edit");
-        
         btnadd.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent evt) {
-                e.setPublication(tf_creator.getText().toString());
+                e.setCommentaire(tf_creator.getText().toString());
                 
             
                     
-                        ServiceTask.getInstance().modifierClub(e);
-
-
-
-  ToastBar.Status status = ToastBar.getInstance().createStatus();
-  status.setMessage("editing publication");
-  status.setShowProgressIndicator(true);
-  status.show();
-  // ... Some time later you must clear it
-current.show();
+                        ServiceCommentaire.getInstance().modifieComment(e);
 
                     
                 }
         });
-
 
         addAll(tf_creator,btnadd);
         getToolbar().addMaterialCommandToLeftBar("BACK", FontImage.MATERIAL_ARROW_BACK, ex-> previous.showBack());
