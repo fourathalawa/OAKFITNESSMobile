@@ -5,6 +5,8 @@
 package com.mycompany.myapp.gui;
 
 import com.codename1.ui.Button;
+import com.codename1.ui.Command;
+import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
@@ -22,7 +24,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import com.codename1.ui.events.ActionListener;
 import com.mycompany.myapp.entities.Commentaire;
+import com.mycompany.myapp.entities.Reclamation;
 import com.mycompany.myapp.services.ServiceCommentaire;
+import com.mycompany.myapp.services.ServiceReclamation;
 import java.text.ParseException;
 
 
@@ -41,30 +45,36 @@ public class AddReport extends Form {
      
      current = this; 
        
-        setTitle("Edit");
+        setTitle("Reclam");
         getContentPane().setScrollVisible(false);
         
         
-        tf_creator=new TextField(e.getCommentaire(),"creator");
+    TextField tfName = new TextField("", "report");
+        Button btnValider = new Button("Add report");
 
-       
-        Picker tf_date = new Picker();
-       
-        Button btnadd=new Button("Edit");
-        btnadd.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent evt) {
-                e.setCommentaire(tf_creator.getText().toString());
-                
-            
-                    
-                        ServiceCommentaire.getInstance().modifieComment(e);
+        btnValider.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                if ((tfName.getText().length() == 0) || (tfName.getText().length() == 0)) {
+                    Dialog.show("Alert", "Please fill all the fields", new Command("OK"));
+                } else {
+                    try {
+                        Reclamation t = new Reclamation(tfName.getText().toString(),e.getCommentaire(),e.getIdcommentaire());
+                        if (ServiceReclamation.getInstance().addReclam(t)) {
+                            Dialog.show("Success", "Connection accepted", new Command("OK"));
+                        } else {
+                            Dialog.show("ERROR", "Server error", new Command("OK"));
+                        }
+                    } catch (NumberFormatException e) {
+                        Dialog.show("ERROR", "Status must be a number", new Command("OK"));
+                    }
 
-                    
                 }
+
+            }
         });
 
-        addAll(tf_creator,btnadd);
+        addAll(tfName, btnValider);
         getToolbar().addMaterialCommandToLeftBar("BACK", FontImage.MATERIAL_ARROW_BACK, ex-> previous.showBack());
     }
     

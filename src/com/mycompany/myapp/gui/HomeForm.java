@@ -24,10 +24,14 @@ Form current;
         add(new Label("Choose an option"));
         Button btnAddTask = new Button("Ask a question");
         Button btnListTasks = new Button("Forum");
+        Button btnListReport = new Button("Reports");
+
         
         btnAddTask.addActionListener(e-> new AddTaskForm(current).show());
         btnListTasks.addActionListener(e-> new ListTasksForm(current).show());
-        addAll(btnAddTask,btnListTasks);
+        btnListReport.addActionListener(e-> new ListReport(current).show());
+
+        addAll(btnAddTask,btnListTasks,btnListReport);
         
         
     }

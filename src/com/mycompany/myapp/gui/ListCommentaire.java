@@ -80,13 +80,17 @@ sb.setImageToShare(imageFile, "image/png");
             Label Type1 = new Label("comment :" +b.getCommentaire());
             Label date = new Label("date :" +b.getDatecommentaire());
             Button btnDelete = new Button("Delete");
-        Button btnadd=new Button("Edit");
+        Button btnadd =new Button("Edit");
+        Button rep =new Button("report");
+
 
             add(name);
             add(Type1);
             add(date);
             add(btnDelete);
             add(btnadd);
+            add(rep);
+
 
 
    btnDelete.addActionListener(new ActionListener() {
@@ -101,6 +105,8 @@ new ListCommentaire(e,c,previous).show();
             });
 
           btnadd.addActionListener(ex -> new updateComm(b,current).show());
+          rep.addActionListener(ex -> new AddReport(b,current).show());
+
 
 //
         }
@@ -115,7 +121,7 @@ new ListCommentaire(e,c,previous).show();
 
                 } else {
                     try {
-                        Commentaire t = new Commentaire(tfName.getText().toString(),95);
+                        Commentaire t = new Commentaire(tfName.getText().toString(),e.getIdpublication());
                         if (ServiceCommentaire.getInstance().addCommentaire(t)) {
                             Dialog.show("Success", "Connection accepted", new Command("OK"));
 new ListCommentaire(e,c,previous).show();

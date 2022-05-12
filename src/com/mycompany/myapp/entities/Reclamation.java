@@ -12,10 +12,20 @@ public class Reclamation {
 public int idreclamation,iduserreclamation,idcommentreclam,idreclameur;
 public String descrreclam,categreclam,datereclam,etatreclamation,commentairerec,pubrec;
 
-    public Reclamation(int idcommentreclam, String descrreclam) {
+    public Reclamation(String descrreclam, String commentairerec,int idcommentreclam) {
+        this.descrreclam = descrreclam;
+        this.commentairerec = commentairerec;
+        this.idcommentreclam = idcommentreclam;
+
+    }
+
+    public Reclamation(int idreclamation, int iduserreclamation, int idcommentreclam, int idreclameur, String descrreclam, String categreclam, String datereclam, String etatreclamation, String commentairerec, String pubrec) {
         this.idcommentreclam = idcommentreclam;
         this.descrreclam = descrreclam;
+        this.commentairerec = commentairerec;
     }
+
+  
 
     public Reclamation() {
     }
@@ -102,6 +112,6 @@ public String descrreclam,categreclam,datereclam,etatreclamation,commentairerec,
 
      @Override
     public String toString() {
-        return "description {" + "id=" + descrreclam + ", id=" + idreclamation + ", idcomm=" + idcommentreclam + "}";
+        return "description {" + "id=" + descrreclam + ", id=" + idreclamation + ", idcomm=" + idcommentreclam + "idc"+idcommentreclam+ "}";
     }
 }
