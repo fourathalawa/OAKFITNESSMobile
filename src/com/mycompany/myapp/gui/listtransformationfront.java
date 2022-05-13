@@ -20,6 +20,8 @@ import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BoxLayout;
 import com.mycompany.myapp.entities.Transformation;
 import com.mycompany.myapp.services.servicetransformationfront;
+import com.mycompany.myapp.utils.SessionManager;
+
 
 import java.util.ArrayList;
 import com.mycompany.myapp.utils.statics;
@@ -92,7 +94,7 @@ public listtransformationfront(Form previous) {
                 c3.add(cat8);
                 c3.add(cat9);
                 c3.add(cat10);
-
+               
                 Button Delete = new Button("Delete");
                 
                 
@@ -102,10 +104,11 @@ public listtransformationfront(Form previous) {
                 });
 
                 Button Upvote = new Button("Up Vote");
-                Button Downvote = new Button("Down Vote");            
-// integration (if r.getIdUser() == session.getIdUser){
+                Button Downvote = new Button("Down Vote");  
+/// integration          
+             if(SessionManager.getId()== r.getIdUser()){
                 c3.add(Modifier);
-                c3.add(Delete);
+                c3.add(Delete);}
                 c3.add(Upvote);
                 c3.add(Downvote);
 //}-------------------------------------------------------

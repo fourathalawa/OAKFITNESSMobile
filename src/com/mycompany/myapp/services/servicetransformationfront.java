@@ -15,6 +15,8 @@ import com.codename1.ui.Image;
 import com.codename1.ui.URLImage;
 import com.codename1.ui.events.ActionListener;
 import com.mycompany.myapp.entities.Transformation;
+import com.mycompany.myapp.utils.SessionManager;
+
 
 import com.mycompany.myapp.utils.statics;
 import java.io.IOException;
@@ -127,7 +129,7 @@ public class servicetransformationfront {
     public void addTransformation(Transformation c) {
         //c.getIdUser()=session.getIdUser
         String url = statics.BASE_URL + "transformation/codename/addt?titreimage=" + c.getTitreImage() + "&descreptionimage=" + c.getDescreptionImage() + "&imageavant="
-                + c.getImageAvant() + "&imageapres=" + c.getImageApres()+ "&poidavant=" + c.getPoidAvant()+ "&poidapres=" + c.getPoidApres()+ "&tailleavant=" + c.getTailleAvant()+ "&tailleapres=" + c.getTailleApres()+ "&tlike=" + c.getTlikes()+ "&iduser=" + c.getIdUser();
+                + c.getImageAvant() + "&imageapres=" + c.getImageApres()+ "&poidavant=" + c.getPoidAvant()+ "&poidapres=" + c.getPoidApres()+ "&tailleavant=" + c.getTailleAvant()+ "&tailleapres=" + c.getTailleApres()+ "&tlike=" + c.getTlikes()+ "&iduser=" + SessionManager.getId();
          
     
          req.setUrl(url);

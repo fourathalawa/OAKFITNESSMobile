@@ -9,6 +9,7 @@ import com.codename1.ui.Button;
 import com.codename1.ui.Form;
 import com.codename1.ui.Label;
 import com.codename1.ui.layouts.BoxLayout;
+import com.mycompany.myapp.utils.SessionManager;
 
 /**
  *
@@ -29,20 +30,31 @@ Form current;
         
         btnAddTask.addActionListener(e-> new AddTaskForm(current).show());
         btnListTasks.addActionListener(e-> new ListTasksForm(current).show());
-        btnListReport.addActionListener(e-> new ListReport(current).show());
-
-        addAll(btnAddTask,btnListTasks,btnListReport);
+        
+        add(btnAddTask);
+        add(btnListTasks);
+       
        current = this; //Récupération de l'interface(Form) en cours
-    int session = 0;
+        int session = SessionManager.getRole(); /////////////////
     
         setTitle("Home");
         setLayout(BoxLayout.y());
         
-        Button btnListEvents = new Button("List Events");
+        Button btnListEvents = new Button("List Eventxs");
         Button btnAddTrans = new Button("Transformation");
         Button btnAddshop = new Button(" Products");
+        Button btnProfile = new Button("Profile");
+        Button btnUsers = new Button("Users");
+        if(session==3){
+        btnUsers.addActionListener(e -> new Admin().show());
+add(btnUsers);
+btnListReport.addActionListener(e-> new ListReport(current).show());
+ add(btnListReport);
+        }
 
-        if(session==0){
+
+
+        if(session!=0){
         btnListEvents.addActionListener(e -> new ListEventsForm(current).show());
         }else{
         btnListEvents.addActionListener(e -> {
@@ -50,12 +62,12 @@ Form current;
         });
         }
 
-       if(session==0){
+       if(session!=0){
          btnAddshop.addActionListener(e -> new Listproduit(current).show());
         }else{
         btnAddshop.addActionListener(e -> new Listproduitfront(current).show());
         }
- if(session==0){
+ if(session!=0){
          btnAddTrans.addActionListener(e -> new listtransformation(current).show());
         }else{
         btnAddTrans.addActionListener(e -> new listtransformationfront(current).show());
@@ -73,7 +85,7 @@ Form current;
         
         
         Button btnListReaps = new Button("List Meals");
-        if(session==0){
+        if(session!=0){
         btnListReaps.addActionListener(e -> new ListRepasForm(current).show());
         }else{
         btnListReaps.addActionListener(e -> new ListRepas(current).show());
@@ -83,7 +95,7 @@ Form current;
          
          
         Button btnListExercice = new Button("List Exercice");
-        if(session==0){
+        if(session!=0){
         btnListExercice.addActionListener(e -> new ListExerciceForm(current).show());
         }
         else{
@@ -91,8 +103,11 @@ Form current;
         }
         add(btnListExercice);
         
+        btnProfile.addActionListener(e -> new showuser().show());
+        add(btnProfile);
+
+    }   
         
-    }
     
     
 }
