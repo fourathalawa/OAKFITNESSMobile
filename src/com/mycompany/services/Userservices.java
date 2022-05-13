@@ -9,6 +9,7 @@ import com.codename1.io.ConnectionRequest;
 import com.codename1.io.JSONParser;
 import com.codename1.io.NetworkEvent;
 import com.codename1.io.NetworkManager;
+import com.codename1.l10n.ParseException;
 import com.codename1.l10n.SimpleDateFormat;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.TextField;
@@ -26,6 +27,7 @@ import static java.lang.Math.round;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
 
 /**
  *
@@ -80,7 +82,7 @@ public class Userservices {
 
          String url = "http://localhost:8000/user/loginuser?mailuser="+email.getText().toString()+"&password="+password.getText().toString();
         req = new ConnectionRequest(url,false); 
-         int role;
+         
         
         req.addResponseListener((NetworkEvent e) -> {
             JSONParser j=new JSONParser();
@@ -96,7 +98,7 @@ public class Userservices {
            
                             System.out.println("hi"+userlistjson);
 
-                
+                int role;
                
                 
               
@@ -104,6 +106,8 @@ public class Userservices {
                   //Session 
                   float id = Float.parseFloat(userlistjson.get("iduser").toString());
               SessionManager.setId(round(id));
+              float role2 = Float.parseFloat(userlistjson.get("roleuser").toString());
+              role =round(role2);
                SessionManager.setPassword(userlistjson.get("password").toString());
                SessionManager.setName(userlistjson.get("nomuser").toString());
                 SessionManager.setLastname(userlistjson.get("prenomuser").toString());
@@ -120,12 +124,12 @@ public class Userservices {
                 if(userlistjson.get("imageuser") != null)
                     SessionManager.setProfilepicture(userlistjson.get("imageuser").toString());
                     System.out.println(SessionManager.getEmail());
-                   if(userlistjson.get("roleuser").toString()!="3")
+                   if(role!=3)
                 {
 new showuser().show();
                         }
-                   else{} 
-//new Admin().show();               
+                   else{new Admin().show();  } 
+             
                      } catch (IOException ex) {
              }
              
@@ -160,36 +164,65 @@ new showuser().show();
 return resultOK;    
     }
 
-    public void editprofile(SessionManager session) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+   
     
     
     public ArrayList<User> getAllUsers(){
         String url = "http://localhost:8000/user/allusers";
-        req = new ConnectionRequest(url,false);
-       
-      
-         users = new ArrayList<>();
+                req = new ConnectionRequest(url,false); 
 
-     
         req.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override
             public void actionPerformed(NetworkEvent evt) {
-       JSONParser j=new JSONParser();
-    String json = new String(req.getResponseData());      
-    System.out.println(json);
-
-               if(json!=null){
-                   
-                   users=getList();
-               }
-               req.removeResponseListener(this);
-        }});
+                try {
+                    users = parseUsers(new String(req.getResponseData()));
+                } catch (ParseException ex) {
+                 //   Logger.getLogger(Userservices.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
         return users;
-        
     }
-    
+      public ArrayList<User> parseUsers(String jsonText) throws ParseException {
+        try {
+            users = new ArrayList<>();
+            JSONParser j = new JSONParser();
+
+         
+          
+            Map<String, Object> usersListJson = j.parseJSON(new CharArrayReader(jsonText.toCharArray()));
+
+ 
+        
+            List<Map<String, Object>> list = (List<Map<String, Object>>) usersListJson.get("root");
+            for (Map<String, Object> obj : list) {
+                User e = new User();
+                float id = Float.parseFloat(obj.get("iduser").toString());
+                e.setId((int) id);
+                e.setNom(obj.get("nomuser").toString());
+                                e.setPrenom(obj.get("prenomuser").toString());
+
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+                try {
+                    System.out.println(sdf.parse(obj.get("datenaissanceuser").toString()));
+                    e.setDate_Naissance(String.valueOf(obj.get("datenaissanceuser")));
+                } catch (ParseException ex) {
+
+                }
+                e.setMail(obj.get("mailuser").toString());
+                e.setTelephone_Number(Long.parseLong(obj.get("telephonenumberuser").toString()));
+                users.add(e);
+            }
+
+        } catch (IOException ex) {
+
+        }
+      
+        return users;
+    }
    private ArrayList<User> getList() {
         try {
             Map<String, Object> parsedJson = new JSONParser().parseJSON(new CharArrayReader(
@@ -221,4 +254,41 @@ return resultOK;
         }
         return users;
     }
+
+    public void editUser(TextField name, TextField lastname, TextField email, TextField phone, TextField pass) {
+ boolean valide=false; 
+        boolean etat=true; 
+        String url = "http://localhost:8000/user/editUser?iduser="+SessionManager.getId()+"&nomuser="+name.getText().toString()+"&prenomuser="+lastname.getText().toString()+"&mailuser="+email.getText().toString()+"&roleuser="+0+"&telephonenumberuser="+phone.getText().toString()+"&password="+pass.getText().toString();
+        req = new ConnectionRequest(url,false); 
+
+          System.out.println(url);
+        //Control saisi
+        if(name.getText().equals(" ")&& lastname.getText().equals(" ")&& email.getText().equals(" ")&&phone.getText().equals(" ")) {
+            
+            Dialog.show("Erreur","Veuillez remplir les champs","OK",null);
+            
+        }
+        
+        //hethi wa9t tsir execution ta3 url 
+        req.addResponseListener((e)-> {
+           SessionManager.setName(name.getText().toString());
+                SessionManager.setLastname(lastname.getText().toString());
+               
+                SessionManager.setEmail(email.getText().toString());
+                SessionManager.setTelephone(Long.parseLong(phone.getText().toString()));
+                            SessionManager.setPassword(pass.getText().toString());
+
+            byte[]data = (byte[]) e.getMetaData();
+            String responseData = new String(data);
+            
+            System.out.println("data ===>"+responseData);
+            new showuser().show();
+        }
+        );
+        
+        
+        //ba3d execution ta3 requete ely heya url nestanaw response ta3 server.
+        NetworkManager.getInstance().addToQueueAndWait(req);
+    }
+    
 }

@@ -33,7 +33,7 @@ import java.util.Date;
 public class editUser extends BaseForm {
     TextField nom,prenom,phone,email;
      TextField password;
-    public editUser() throws ParseException
+    public editUser()
     {
        super(BoxLayout.y());
      
@@ -46,12 +46,10 @@ public class editUser extends BaseForm {
        prenom=new TextField(SessionManager.getLastname(),"Last Name"); 
          phone=new TextField(String. valueOf(SessionManager.getTelephone()),"Phone number");
          email=new TextField(SessionManager.getEmail(),"Email");
-        password=new TextField(SessionManager.getDate(),"Password");
-        Picker tf_date = new Picker();
-        tf_date.setType(Display.PICKER_TYPE_DATE);
-        Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(SessionManager.getDate());
-        tf_date.setDate(date1);
-        Button btnupd=new Button("Profile event");
+                password=new TextField(SessionManager.getPassword(),"Password");
+
+    
+        Button btnupd=new Button("Profile edit");
         
         btnupd.addActionListener(new ActionListener() {
               
@@ -62,12 +60,11 @@ public class editUser extends BaseForm {
                session.setLastname(prenom.getText().toString());
              session.setEmail(email.getText().toString());
              session.setTelephone(Long.parseLong(phone.getText().toString()));
-                    session.setDate(tf_date.getText().toString());
                     session.setPassword(password.getText().toString());
-                    Userservices.getInstance().editprofile(session);
+                    Userservices.getInstance().editUser(nom,prenom,email,phone,password);
                 }
         });
-        addAll(nom,prenom,email,phone,tf_date,password,btnupd);
+        addAll(nom,prenom,email,phone,password,btnupd);
     }
     
 }

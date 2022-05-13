@@ -124,17 +124,8 @@ ch.getChallenge(SessionManager.getId());
         });
                                         Button lModifier = new Button("Modifier");
                                          
-  lModifier.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                Userservices us=new Userservices();
-                try {
-                    new editUser().show();
-                } catch (ParseException ex) {
-                }
-                System.out.println("done");
-            }
-        });
+            lModifier.addActionListener(ex -> new editUser().show());
+
   add(addchallenge);
     add(challenge);
        

@@ -34,8 +34,7 @@ public class newChallnege extends BaseForm {
        Picker datefin = new Picker();
         datefin.setType(Display.PICKER_TYPE_DATE);  
         Button submit=new Button("Submit");
-       
-        
+
         submit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {

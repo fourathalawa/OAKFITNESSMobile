@@ -5,9 +5,6 @@
 package com.mycompany.gui;
 
 import com.codename1.components.MultiButton;
-import com.codename1.io.ConnectionRequest;
-import com.codename1.io.JSONParser;
-import com.codename1.io.NetworkEvent;
 import com.codename1.ui.Button;
 import com.codename1.ui.Container;
 import com.codename1.ui.FontImage;
@@ -31,71 +28,31 @@ import java.util.ArrayList;
  */
 public class Admin  extends BaseForm{
     public  ArrayList<User> users=new ArrayList<User>();
- 
-     
     public Admin(){
         
-        //super(BoxLayout.y());
-     //   Toolbar tb = getToolbar();
-      //  tb.setTitleCentered(false);
-      
-   Button menuButton = new Button("");
-        menuButton.setUIID("Title");
-      
-        
-      
-
-        Container titleCmp = BoxLayout.encloseY(
-                        FlowLayout.encloseIn(menuButton),
-                        BorderLayout.centerAbsolute(
-                                BoxLayout.encloseY(
-                                    new Label(SessionManager.getName()+""+SessionManager.getLastname(), "Title"),
-                                    new Label(SessionManager.getEmail(), "SubTitle")
-                                )
-                            )
-                );
-        
-      
-                        
-        
-        FontImage arrowDown = FontImage.createMaterial(FontImage.MATERIAL_KEYBOARD_ARROW_DOWN, "Label", 3);
-        Button btn=new Button("getUSers");
+  
             
-                Userservices us=new Userservices();
-                String url = "http://localhost:8000/user/allusers";
-        req = new ConnectionRequest(url,false);
-       
-      
-         users = new ArrayList<>();
-
-     
-        req.addResponseListener(new ActionListener<NetworkEvent>() {
-            @Override
-            public void actionPerformed(NetworkEvent evt) {
-       JSONParser j=new JSONParser();
-    String json = new String(req.getResponseData());      
-    System.out.println(json);
-
-               if(json!=null){
-                   
-                   users=getList();
-               }
-               req.removeResponseListener(this);
-        }});
+               // Userservices us=new Userservices();
+                  users=Userservices.getInstance().getAllUsers();
       Container list =new Container(BoxLayout.y());
        list.setScrollableY(true);
+       int i=1;
        for(User u : users){
-           MultiButton btnnom =new MultiButton(u.getNom());
-           MultiButton btnprenom=new MultiButton(u.getPrenom());
-           MultiButton btnemail=new MultiButton(u.getMail());
-           MultiButton btnpassword=new MultiButton(u.getPassword());
-           MultiButton btntel=new MultiButton(String.valueOf(u.getTelephone_Number()));
- btnnom.setTextLine2(u.getNom());
-  btnprenom.setTextLine2(u.getPrenom());
-  btnemail.setTextLine2(u.getMail());
-  btnpassword.setTextLine2(u.getPassword());
-//  btnrole.setTextLine2(u.getRole());
-  btntel.setTextLine2(String.valueOf(u.getTelephone_Number()));
+           MultiButton Usernum =new MultiButton("User "+i+" :");
+           Label btnnom =new Label();
+           Label btnprenom=new Label();
+           Label btnemail=new Label();
+           Label btnpassword=new Label();
+           Label btntel=new Label( );
+          i++;
+ btnnom.setText("Name :"+u.getNom());
+  btnprenom.setText("LastName :"+u.getPrenom());
+  btnemail.setText("Email :"+u.getMail());
+    btnpassword.setText("Birth Date"+u.getDate_Naissance());
+
+   btntel.setText("Phone number :"+String.valueOf(u.getTelephone_Number()));
+
+list.add(Usernum); 
 list.add(btnnom);
 list.add(btnprenom);
 list.add(btnemail);
@@ -106,7 +63,6 @@ list.add(btntel);
         add(list);
             
       
-        add(btn);
     }
     
     private void addButtonBottom(Image arrowDown, String text, int color, boolean first) {

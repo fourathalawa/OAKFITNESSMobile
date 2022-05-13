@@ -15,7 +15,24 @@ public class SessionChallenge {
      private static int id ;
      private static float poidinit ;
      private static float poidob;
+     private static float imcCur;
+     private static float imcob;
 
+    public static float getImcCur() {
+        return imcCur;
+    }
+
+    public static void setImcCur(float imcCur) {
+        SessionChallenge.imcCur = imcCur;
+    }
+
+    public static float getImcob() {
+        return imcob;
+    }
+
+    public static void setImcob(float imcob) {
+        SessionChallenge.imcob = imcob;
+    }
    private static int id_user;
 
     public static int getId_user() {

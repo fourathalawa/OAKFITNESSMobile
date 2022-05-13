@@ -54,7 +54,7 @@ public class MyApplication {
             current.show();
             return;
         }
-       new Admin().show();
+       new Login().show();
                
     }
 
