@@ -29,21 +29,27 @@ public class Login extends BaseForm{
          tf_email=new TextField("","Email");
          tf_password=new TextField("","Password");
         Button btnlogin=new Button("Login");
+          Button forget= new Button("Did you forget your password?");
         Button btnreg= new Button(" Don't have an account ?SignUp...");
-        
         btnlogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 Userservices us=new Userservices();
                us.signin(tf_email,tf_password);
-              new showuser().show();
-                System.out.println("done");
+              
             }
         });
         btnreg.addActionListener(new ActionListener() {
               @Override
               public void actionPerformed(ActionEvent evt) {
                 new SignUp(theme).show();
+                  
+              }
+          });
+         forget.addActionListener(new ActionListener() {
+              @Override
+              public void actionPerformed(ActionEvent evt) {
+               // new forgetPassword().show();
                   
               }
           });

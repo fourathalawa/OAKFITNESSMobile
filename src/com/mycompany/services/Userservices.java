@@ -16,11 +16,15 @@ import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.spinner.Picker;
 import com.codename1.ui.util.Resources;
 import com.mycompany.entities.User;
+import com.mycompany.gui.Admin;
+import com.mycompany.gui.Login;
+import com.mycompany.gui.showuser;
 import com.mycompany.utils.SessionManager;
 import com.mycompany.utils.Statics;
 import java.io.IOException;
 import static java.lang.Math.round;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -63,6 +67,7 @@ public class Userservices {
             String responseData = new String(data);
             
             System.out.println("data ===>"+responseData);
+            new Login().show();
         }
         );
         
@@ -75,7 +80,7 @@ public class Userservices {
 
          String url = "http://localhost:8000/user/loginuser?mailuser="+email.getText().toString()+"&password="+password.getText().toString();
         req = new ConnectionRequest(url,false); 
-      
+         int role;
         
         req.addResponseListener((NetworkEvent e) -> {
             JSONParser j=new JSONParser();
@@ -109,17 +114,21 @@ public class Userservices {
                 SessionManager.setTelephone(Long.parseLong(userlistjson.get("telephonenumberuser").toString()));
 
                 //photo *
+             
                     System.out.println(SessionManager.getEmail());
                 Dialog.show("authentification avec succees ","session plein","OK",null);
                 if(userlistjson.get("imageuser") != null)
                     SessionManager.setProfilepicture(userlistjson.get("imageuser").toString());
                     System.out.println(SessionManager.getEmail());
-                
-               
+                   if(userlistjson.get("roleuser").toString()!="3")
+                {
+new showuser().show();
+                        }
+                   else{} 
+//new Admin().show();               
                      } catch (IOException ex) {
              }
-              
-                
+             
                 
                 
                 
@@ -153,5 +162,63 @@ return resultOK;
 
     public void editprofile(SessionManager session) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
+    public ArrayList<User> getAllUsers(){
+        String url = "http://localhost:8000/user/allusers";
+        req = new ConnectionRequest(url,false);
+       
+      
+         users = new ArrayList<>();
+
+     
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+       JSONParser j=new JSONParser();
+    String json = new String(req.getResponseData());      
+    System.out.println(json);
+
+               if(json!=null){
+                   
+                   users=getList();
+               }
+               req.removeResponseListener(this);
+        }});
+        return users;
+        
+    }
+    
+   private ArrayList<User> getList() {
+        try {
+            Map<String, Object> parsedJson = new JSONParser().parseJSON(new CharArrayReader(
+                    new String(req.getResponseData()).toCharArray()
+                    
+            ));
+            
+            List<Map<String, Object>> list = (List<Map<String, Object>>) parsedJson.get("root");
+
+            for (Map<String, Object> obj : list) {
+                User u = new User();
+                        int id= (int) Float.parseFloat(obj.get("iduser").toString());
+                        String nom= (String) obj.get("nomuser");
+                         String prenom=obj.get("prenomuser").toString();
+                         String email= obj.get("mailuser").toString();
+                         String password=obj.get("password").toString();
+                         Long numtel=Long.parseLong(obj.get("telephonenumberuser").toString());
+                         String date=obj.get("datenaissanceuser").toString();
+                         u.setNom(nom);
+                         u.setPrenom(prenom);
+                         u.setMail(email);
+                         u.setDate_Naissance(date);
+                         u.setTelephone_Number(numtel);
+
+                users.add(u);
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return users;
     }
 }

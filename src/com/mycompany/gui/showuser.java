@@ -101,6 +101,16 @@ BaseForm current;
                 alert.showDialog();
 
             });
+            Button addchallenge = new Button("MY New Challenge");
+
+addchallenge.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+
+                new newChallnege().show();
+               
+            }
+        });
 Button challenge = new Button("My Challenge");
 
 challenge.addActionListener(new ActionListener() {
@@ -125,6 +135,7 @@ ch.getChallenge(SessionManager.getId());
                 System.out.println("done");
             }
         });
+  add(addchallenge);
     add(challenge);
        
             add(Delete1);

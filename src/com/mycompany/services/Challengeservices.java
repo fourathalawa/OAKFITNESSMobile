@@ -28,6 +28,10 @@ import java.util.Map;
  * @author User
  */
 public class Challengeservices {
+
+    public static Object getInstance() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
    public boolean resultOK; 
       public ArrayList<Challenge> ch;
@@ -93,12 +97,12 @@ String url = "http://localhost:8000/challenge/getCH/"+id;
              try {
                  userlistjson = j.parseJSON(new CharArrayReader(json.toCharArray()));
            
-                            System.out.println("hi"+userlistjson);
+                      if(userlistjson!=null)              
+{      System.out.println("hi"+userlistjson);
 
                 
                
                 
-              
 
                   //Session 
                   float idch = Float.parseFloat(userlistjson.get("idchallenge").toString());
@@ -118,7 +122,20 @@ String url = "http://localhost:8000/challenge/getCH/"+id;
        /* String date = sdf.format(userlistjson.get("datenaissanceuser"));
  SessionManager.setDate(date);*/
 
-               
+}else 
+{
+        SessionChallenge.setId(0);
+               SessionChallenge.setPoidinit(0);
+              
+               SessionChallenge.setPoidnv(0);
+              
+               SessionChallenge.setPoidob(0);
+               SessionChallenge.setTaille(0);
+              
+               SessionChallenge.setId_user(0);
+               SessionChallenge.setDatedeb(null);
+               SessionChallenge.setDatefin(null);
+}
                      } catch (IOException ex) {
              }
               
@@ -132,5 +149,22 @@ String url = "http://localhost:8000/challenge/getCH/"+id;
          //ba3d execution ta3 requete ely heya url nestanaw response ta3 server.
         NetworkManager.getInstance().addToQueueAndWait(req);
     }
+     public boolean deleteChallenge(int t) {
+        System.out.println(t);
+        System.out.println("******");
+     
+       String url = "http://127.0.0.1:8000/challenge/deletemobile/"+t;
+        req = new ConnectionRequest(url,false); 
+      req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+             resultOK = req.getResponseCode() == 200; //Code HTTP 200 OK
+                req.removeResponseListener(this);
+            }
+        });
     
+        NetworkManager.getInstance().addToQueueAndWait(req);
+return resultOK;    
+    }
+     
 }

@@ -90,6 +90,10 @@ public class SessionManager {
     public static void setProfilepicture(String profilepicture) {
          pref.set("profilepicture",profilepicture);
     }
+
+    public static String getNom() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
                
 }

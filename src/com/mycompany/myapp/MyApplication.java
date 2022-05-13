@@ -13,6 +13,7 @@ import com.codename1.ui.Toolbar;
 import java.io.IOException;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.io.NetworkEvent;
+import com.mycompany.gui.Admin;
 import com.mycompany.gui.Login;
 import com.mycompany.gui.SignUp;
 
@@ -53,7 +54,7 @@ public class MyApplication {
             current.show();
             return;
         }
-       new Login().show();
+       new Admin().show();
                
     }
 
