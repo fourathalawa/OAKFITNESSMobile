@@ -28,6 +28,7 @@ import com.codename1.ui.plaf.RoundBorder;
 import com.codename1.ui.Label;
 import com.codename1.io.URL;
 import com.codename1.io.File;
+import java.io.IOException;
 
 
 /**
@@ -35,6 +36,10 @@ import com.codename1.io.File;
  * @author kriaa
  */
 public class Listproduitfront  extends Form {
+  private EncodedImage enc;
+    Image image;
+    ImageViewer imgv;
+    private String url = "http://127.0.0.1:8000/public/uploads/images";
 public Listproduitfront(Form previous) {
 
         setTitle("Welcome to Our Shop");
@@ -63,14 +68,15 @@ public Listproduitfront(Form previous) {
                 SpanLabel cat4 = new SpanLabel("Product Image :" + r.getImageProduit());
                  SpanLabel cat7 = new SpanLabel("");
             
-            Image placeholder = Image.createImage(200, 200);
-            EncodedImage enc = EncodedImage.createFromImage(placeholder, false);
-            URLImage urlim = URLImage.createToStorage(enc, r.getImageProduit(),  r.getImageProduit());
-            ImageViewer imgV = new ImageViewer();
-           System.out.println(urlim.toString());
-             imgV.setImage(urlim);
-            
-               c3.add(imgV);   
+             //image
+            try {              
+                enc=EncodedImage.create("/hhh.png");
+            } catch (IOException ex) {
+            }
+            image=URLImage.createToStorage(enc,r.getImageProduit(),url+r.getImageProduit(),URLImage.RESIZE_SCALE).scaled(700, 300);
+            imgv=new ImageViewer(image);
+            add(imgv);
+            //endimage
                 
                 c3.add(cat);
                 c3.add(cat0);

@@ -86,12 +86,12 @@ Form previous;
                });
             }
         });
-  CheckBox multiSelect2 = new CheckBox("Multi-select");
+        CheckBox multiSelect1 = new CheckBox("Multi-select");
         Button testImage2 = new Button("Browse Image Transformation After");
         testImage2.addActionListener(e->{
             if (FileChooser.isAvailable()) {
                 
-                FileChooser.showOpenDialog(multiSelect.isSelected(), ".pdf,application/pdf,.gif,image/gif,.png,image/png,.jpg,image/jpg,.tif,image/tif,.jpeg,.bmp", e2-> {
+                FileChooser.showOpenDialog(multiSelect1.isSelected(), ".pdf,application/pdf,.gif,image/gif,.png,image/png,.jpg,image/jpg,.tif,image/tif,.jpeg,.bmp", e2-> {
                     if(e2!=null && e2.getSource()!=null) {
 
                         String file = (String)e2.getSource();

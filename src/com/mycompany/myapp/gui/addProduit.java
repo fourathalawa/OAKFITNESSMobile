@@ -77,29 +77,29 @@ Font materialFontAjout = FontImage.getMaterialDesignFont();
 
         CheckBox multiSelect = new CheckBox("Multi-select");
         Button testImage = new Button("Browse Images");
-        testImage.addActionListener(e->{
+        testImage.addActionListener(e -> {
             if (FileChooser.isAvailable()) {
-                
-                FileChooser.showOpenDialog(multiSelect.isSelected(), ".pdf,application/pdf,.gif,image/gif,.png,image/png,.jpg,image/jpg,.tif,image/tif,.jpeg,.bmp", e2-> {
-                    if(e2!=null && e2.getSource()!=null) {
 
-                        String file = (String)e2.getSource();
-                        String pathLogo=file;
-                        String exx=file.substring(file.lastIndexOf("."));
-                        
+                FileChooser.showOpenDialog(multiSelect.isSelected(), ".pdf,application/pdf,.gif,image/gif,.png,image/png,.jpg,image/jpg,.tif,image/tif,.jpeg,.bmp", e2 -> {
+                    if (e2 != null && e2.getSource() != null) {
+
+                        String file = (String) e2.getSource();
+                        String pathLogo = file;
+                        String exx = file.substring(file.lastIndexOf("."));
+                        System.out.println(pathLogo);
                         ImageProduit.setText(pathLogo);
-                        System.out.println("path :"+pathLogo+ " extension :" +exx);
-                        
+                        System.out.println("path :" + pathLogo + " extension :" + exx);
+
                         try {
                             Image img = Image.createImage(file);
                             this.add(new Label(img));
                             this.revalidate();
                         } catch (Exception ex) {
+
                         }
 
-
                     }
-               });
+                });
             }
         });
         this.add(testImage);

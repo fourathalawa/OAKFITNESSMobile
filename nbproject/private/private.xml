@@ -15,6 +15,7 @@
         <group>
             <file>file:/C:/Users/kriaa/Documents/NetBeansProjects/ProduitOakFitness/OAKFITNESSMobile/src/com/mycompany/myapp/gui/addTransformation.java</file>
             <file>file:/C:/Users/kriaa/Documents/NetBeansProjects/ProduitOakFitness/OAKFITNESSMobile/src/com/mycompany/myapp/services/servicetransformationfront.java</file>
+            <file>file:/C:/Users/kriaa/Documents/NetBeansProjects/ProduitOakFitness/OAKFITNESSMobile/src/com/mycompany/myapp/gui/ListRepas.java</file>
             <file>file:/C:/Users/kriaa/Documents/NetBeansProjects/ProduitOakFitness/OAKFITNESSMobile/src/com/mycompany/myapp/gui/listtransformationfront.java</file>
             <file>file:/C:/Users/kriaa/Documents/NetBeansProjects/ProduitOakFitness/OAKFITNESSMobile/src/com/mycompany/myapp/gui/Admin.java</file>
             <file>file:/C:/Users/kriaa/Documents/NetBeansProjects/ProduitOakFitness/OAKFITNESSMobile/src/com/mycompany/myapp/gui/AddTaskForm.java</file>
@@ -26,6 +27,7 @@
             <file>file:/C:/Users/kriaa/Documents/NetBeansProjects/ProduitOakFitness/OAKFITNESSMobile/src/com/mycompany/myapp/gui/SignUp.java</file>
             <file>file:/C:/Users/kriaa/Documents/NetBeansProjects/ProduitOakFitness/OAKFITNESSMobile/src/com/mycompany/myapp/entities/Commentaire.java</file>
             <file>file:/C:/Users/kriaa/Documents/NetBeansProjects/ProduitOakFitness/OAKFITNESSMobile/src/com/mycompany/myapp/gui/ListCommentaire.java</file>
+            <file>file:/C:/Users/kriaa/Documents/NetBeansProjects/ProduitOakFitness/OAKFITNESSMobile/src/com/mycompany/myapp/gui/Listproduitfront.java</file>
             <file>file:/C:/Users/kriaa/Documents/NetBeansProjects/ProduitOakFitness/OAKFITNESSMobile/src/com/mycompany/myapp/gui/Login.java</file>
             <file>file:/C:/Users/kriaa/Documents/NetBeansProjects/ProduitOakFitness/OAKFITNESSMobile/src/com/mycompany/myapp/gui/UpdateUser.java</file>
             <file>file:/C:/Users/kriaa/Documents/NetBeansProjects/ProduitOakFitness/OAKFITNESSMobile/src/com/mycompany/myapp/gui/addProduit.java</file>
@@ -33,6 +35,7 @@
             <file>file:/C:/Users/kriaa/Documents/NetBeansProjects/ProduitOakFitness/OAKFITNESSMobile/src/com/mycompany/myapp/MyApplication.java</file>
             <file>file:/C:/Users/kriaa/Documents/NetBeansProjects/ProduitOakFitness/OAKFITNESSMobile/src/com/mycompany/myapp/entities/Task.java</file>
             <file>file:/C:/Users/kriaa/Documents/NetBeansProjects/ProduitOakFitness/OAKFITNESSMobile/src/com/mycompany/myapp/gui/showChallenge.java</file>
+            <file>file:/C:/Users/kriaa/Documents/NetBeansProjects/ProduitOakFitness/OAKFITNESSMobile/src/com/mycompany/myapp/gui/AjoutRepas.java</file>
         </group>
     </open-files>
 </project-private>
