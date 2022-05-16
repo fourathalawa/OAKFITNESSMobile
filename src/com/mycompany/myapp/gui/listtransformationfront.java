@@ -106,7 +106,7 @@ public listtransformationfront(Form previous) {
                 Button Upvote = new Button("Up Vote");
                 Button Downvote = new Button("Down Vote");  
 /// integration          
-             if(SessionManager.getId()== r.getIdUser()){
+         if(SessionManager.getId()== r.getIdUser()){
                 c3.add(Modifier);
                 c3.add(Delete);}
                 c3.add(Upvote);

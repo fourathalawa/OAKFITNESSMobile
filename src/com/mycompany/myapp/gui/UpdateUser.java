@@ -4,11 +4,14 @@
  */
 package com.mycompany.myapp.gui;
 
+import com.codename1.ext.filechooser.FileChooser;
 import com.codename1.ui.Button;
+import com.codename1.ui.CheckBox;
 import static com.codename1.ui.Component.LEFT;
 import com.codename1.ui.Container;
 import com.codename1.ui.Display;
 import com.codename1.ui.Form;
+import com.codename1.ui.Image;
 import com.codename1.ui.Label;
 import com.codename1.ui.TextField;
 import com.codename1.ui.events.ActionEvent;
@@ -57,13 +60,43 @@ public class UpdateUser extends Form {
         lastnameLabel.setVisible(false);
         Label emailLabel= new Label("Enter a correct email","ControlLabel");
         emailLabel.setVisible(false);
-        
+        TextField image =new TextField("", "image");
+        //choose file
+               CheckBox multiSelect = new CheckBox("Multi-select");
+
+        Button testImage = new Button("Browse Images");
+
+        testImage.addActionListener(e -> {
+            if (FileChooser.isAvailable()) {
+
+                FileChooser.showOpenDialog(multiSelect.isSelected(), ".pdf,application/pdf,.gif,image/gif,.png,image/png,.jpg,image/jpg,.tif,image/tif,.jpeg,.bmp", e2 -> {
+                    if (e2 != null && e2.getSource() != null) {
+
+                        String file = (String) e2.getSource();
+                        String pathLogo = file;
+                        String exx = file.substring(file.lastIndexOf("."));
+                        System.out.println(pathLogo);
+                        image.setText(pathLogo);
+                        System.out.println("path :" + pathLogo + " extension :" + exx);
+
+                        try {
+                            Image img = Image.createImage(file);
+                            this.add(new Label(img));
+                            this.revalidate();
+                        } catch (Exception ex) {
+
+                        }
+
+                    }
+                });
+            }
+        });
         Button signup = new Button ("Update");
          signup.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 Userservices us=new Userservices();
-                us.editUser(name,lastname,email,phone,password);
+                us.editUser(name,lastname,email,phone,password,image);
                
             }
         });
@@ -80,7 +113,8 @@ public class UpdateUser extends Form {
                 BorderLayout.center(email),
                 dateLabel,
                                 BorderLayout.center(date),
-           
+           image,
+           testImage,
                signup
 
         );

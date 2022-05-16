@@ -30,7 +30,7 @@ public class ListEvents extends Form {
     private EncodedImage enc;
     Image image;
     ImageViewer imgv;
-    private String url = "http://127.0.0.1:8000/public/uploads/images";
+    private String url = "http://127.0.0.1:8000/public/uploads/images/";
 
     public ListEvents(Form previous) {
         super(BoxLayout.y());
@@ -56,7 +56,7 @@ public class ListEvents extends Form {
             } catch (IOException ex) {
             }
             image=URLImage.createToStorage(enc,e.getImage(),url+e.getImage(),URLImage.RESIZE_SCALE).scaled(700, 300);
-            System.out.println("image :"+url+e.getImage());
+            System.out.println("image : "+url+e.getImage());
             imgv=new ImageViewer(image);
             add(imgv);
             //endimage

@@ -190,5 +190,4 @@ if(SessionChallenge.getPoidnv()!=0)
        
         return series;
     }
-
  }

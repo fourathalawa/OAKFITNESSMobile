@@ -68,8 +68,8 @@ public class ServiceCommentaire {
 
     public boolean addCommentaire(Commentaire t) {
         System.out.println(t);
-        System.out.println("********");
-       String url = statics.BASE_URL + "liste/createcomm/"+t.getIdpublication()+"/?commentaire=" + t.getCommentaire();
+        System.out.println("******");
+       String url = statics.BASE_URL + "liste/createcomm/"+t.getIdpublication()+"/"+t.getIduser()+"/?commentaire=" + t.getCommentaire();
     
        req.setUrl(url);
        
@@ -105,6 +105,7 @@ public class ServiceCommentaire {
                 t.setIdcommentaire((int)id);
                 float idu = Float.parseFloat(obj.get("idpublication").toString());
                 t.setIdpublication((int)idu);
+             
                     t.setDatecommentaire(obj.get("datecommentaire").toString());
                     t.setCommentaire(obj.get("commentaire").toString());
                     t.setUsernamep(obj.get("usernamep").toString());

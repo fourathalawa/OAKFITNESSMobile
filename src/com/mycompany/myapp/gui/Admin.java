@@ -4,14 +4,17 @@
  */
 package com.mycompany.myapp.gui;
 
+import com.codename1.components.ImageViewer;
 import com.codename1.components.MultiButton;
 import com.codename1.ui.Button;
 import com.codename1.ui.Container;
+import com.codename1.ui.EncodedImage;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Graphics;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
 import com.codename1.ui.Toolbar;
+import com.codename1.ui.URLImage;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BorderLayout;
@@ -43,15 +46,23 @@ public class Admin  extends BaseForm{
            Label btnprenom=new Label();
            Label btnemail=new Label();
            Label btnpassword=new Label();
+            String url = "http://localhost:8000/public/" + "images/" + SessionManager.getProfilepicture();
+
            Label btntel=new Label( );
           i++;
+             Image placeholder = Image.createImage(200, 200);
+            EncodedImage enc = EncodedImage.createFromImage(placeholder, false);
+            System.out.println(url);
+            URLImage urlim = URLImage.createToStorage(enc, SessionManager.getProfilepicture(), url);
+            ImageViewer imgV = new ImageViewer();
+            imgV.setImage(urlim);     
  btnnom.setText("Name :"+u.getNom());
   btnprenom.setText("LastName :"+u.getPrenom());
   btnemail.setText("Email :"+u.getMail());
     btnpassword.setText("Birth Date"+u.getDate_Naissance());
 
    btntel.setText("Phone number :"+String.valueOf(u.getTelephone_Number()));
-
+list.add(imgV);
 list.add(Usernum); 
 list.add(btnnom);
 list.add(btnprenom);

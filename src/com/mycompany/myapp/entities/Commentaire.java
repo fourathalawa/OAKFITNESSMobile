@@ -36,9 +36,10 @@ public class Commentaire {
         this.usernamep = usernamep;
     }
 
-    public Commentaire(String commentaire,int idpublication) {
+    public Commentaire(String commentaire,int idpublication , int iduser) {
         this.commentaire = commentaire;
         this.idpublication = idpublication;
+        this.iduser = iduser;
     }
 
 
@@ -108,7 +109,7 @@ public class Commentaire {
 
  @Override
     public String toString() {
-        return "commentaire {" + "id=" + idcommentaire + ", nomc=" + usernamep + ", date=" + datecommentaire + "}";
+        return "commentaire {" + "id=" + idcommentaire + ", nomc=" + usernamep + ", date=" + datecommentaire + "iduser"+ iduser+ "}";
     }
 
 }

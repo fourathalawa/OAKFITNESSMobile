@@ -15,7 +15,8 @@ public class SessionManager {
      private static int id ;
      private static String email ;
      private static String password;
- private static int role;
+     
+
     public static String getDate() {
         return pref.get("date",date);
     }
@@ -36,7 +37,16 @@ public class SessionManager {
      private static long telephone;
     private static String lastname ;
     private static String profilepicture ;
-     public static Preferences getPref() {
+    private static int role; 
+
+    public static int getRole() {
+        return role;
+    }
+
+    public static void setRole(int role) {
+        SessionManager.role = role;
+    }
+    public static Preferences getPref() {
         return pref;
     }
 
@@ -52,13 +62,6 @@ public class SessionManager {
     }
      public static String getEmail() {
         return pref.get("email",email);
-    }
-public static int getRole() {
-        return pref.get("role",role);// kif nheb njib id user connecté apres njibha men pref 
-    }
-
-    public static void setRole(int role) {
-        pref.set("role",role);//nsajl id user connecté  w na3tiha identifiant "id";
     }
 
     public static void setEmail(String email) {

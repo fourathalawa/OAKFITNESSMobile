@@ -40,7 +40,7 @@ Form current;
         setTitle("Home");
         setLayout(BoxLayout.y());
         
-        Button btnListEvents = new Button("List Eventxs");
+        Button btnListEvents = new Button("Events");
         Button btnAddTrans = new Button("Transformation");
         Button btnAddshop = new Button(" Products");
         Button btnProfile = new Button("Profile");
@@ -84,7 +84,7 @@ btnListReport.addActionListener(e-> new ListReport(current).show());
         
         
         
-        Button btnListReaps = new Button("List Meals");
+        Button btnListReaps = new Button("Meals");
         if(session!=0){
         btnListReaps.addActionListener(e -> new ListRepasForm(current).show());
         }else{
@@ -94,7 +94,7 @@ btnListReport.addActionListener(e-> new ListReport(current).show());
         
          
          
-        Button btnListExercice = new Button("List Exercice");
+        Button btnListExercice = new Button("Exercice");
         if(session!=0){
         btnListExercice.addActionListener(e -> new ListExerciceForm(current).show());
         }

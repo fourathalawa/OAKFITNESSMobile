@@ -22,14 +22,12 @@ import com.mycompany.myapp.utils.SessionManager;
 public class Login extends BaseForm{
         private Resources theme;
 
-     TextField tf_email;
-        TextField password = new TextField("", "Password", 20, TextField.PASSWORD);
-
+     TextField tf_email ;
     public Login() {
           setTitle("Log IN");
         setLayout(BoxLayout.y());
          tf_email=new TextField("","Email");
-         password=new TextField("","Password");
+        TextField password = new TextField("", "Password", 20, TextField.PASSWORD);
         Button btnlogin=new Button("Login");
           Button forget= new Button("Did you forget your password?");
         Button btnreg= new Button(" Don't have an account ?SignUp...");

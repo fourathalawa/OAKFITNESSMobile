@@ -47,16 +47,16 @@ public class Userservices {
     }
     public boolean resultOK;
     
-      public void addUser(TextField name,TextField lastname,TextField email,TextField phone,Picker date,TextField password) {
+      public void addUser(TextField name,TextField lastname,TextField email,TextField phone,Picker date,TextField password,TextField image) {
    
            boolean valide=false; 
         boolean etat=true; 
-        String url = "http://localhost:8000/user/inscription?nomuser="+name.getText().toString()+"&prenomuser="+lastname.getText().toString()+"&mailuser="+email.getText().toString()+"&password="+password.getText().toString()+"&roleuser="+0+"&telephonenumberuser="+phone.getText().toString()+"&datenaissanceuser="+date.getText().toString();
+        String url = "http://localhost:8000/user/inscription?nomuser="+name.getText().toString()+"&prenomuser="+lastname.getText().toString()+"&mailuser="+email.getText().toString()+"&password="+password.getText().toString()+"&roleuser="+0+"&telephonenumberuser="+phone.getText().toString()+"&datenaissanceuser="+date.getText().toString()+"&imageuser="+image.getText().toString();
         req = new ConnectionRequest(url,false); 
 
           System.out.println(url);
         //Control saisi
-        if(name.getText().equals(" ")&& lastname.getText().equals(" ")&& password.getText().equals(" ") && email.getText().equals(" ")&&phone.getText().equals(" ")) {
+        if(name.getText().equals(" ")&& lastname.getText().equals(" ")&& password.getText().equals(" ") && email.getText().equals(" ")&&phone.getText().equals(" ")&&image.getText().equals(" ")) {
             
             Dialog.show("Erreur","Veuillez remplir les champs","OK",null);
             
@@ -70,7 +70,7 @@ public class Userservices {
             String responseData = new String(data);
             
             System.out.println("data ===>"+responseData);
-            new Login().show();
+             new HomeForm().show();
         }
         );
         
@@ -117,7 +117,7 @@ public class Userservices {
  SessionManager.setDate(date);*/
                 SessionManager.setEmail(userlistjson.get("mailuser").toString());
                 SessionManager.setTelephone(Long.parseLong(userlistjson.get("telephonenumberuser").toString()));
-                SessionManager.setRole(role);
+ SessionManager.setRole(role);
                 //photo *
              
                     System.out.println(SessionManager.getEmail());
@@ -125,7 +125,11 @@ public class Userservices {
                 if(userlistjson.get("imageuser") != null)
                     SessionManager.setProfilepicture(userlistjson.get("imageuser").toString());
                     System.out.println(SessionManager.getEmail());
-                    new HomeForm().show();
+                   if(role!=3)
+                {
+new HomeForm().show();
+                        }
+                   else{new HomeForm().show();  } 
              
                      } catch (IOException ex) {
              }
@@ -252,15 +256,15 @@ return resultOK;
         return users;
     }
 
-    public void editUser(TextField name, TextField lastname, TextField email, TextField phone, TextField pass) {
+    public void editUser(TextField name, TextField lastname, TextField email, TextField phone, TextField pass,TextField image) {
  boolean valide=false; 
         boolean etat=true; 
-        String url = "http://localhost:8000/user/editUser?iduser="+SessionManager.getId()+"&nomuser="+name.getText().toString()+"&prenomuser="+lastname.getText().toString()+"&mailuser="+email.getText().toString()+"&roleuser="+0+"&telephonenumberuser="+phone.getText().toString()+"&password="+pass.getText().toString();
+        String url = "http://localhost:8000/user/editUser?iduser="+SessionManager.getId()+"&nomuser="+name.getText().toString()+"&prenomuser="+lastname.getText().toString()+"&mailuser="+email.getText().toString()+"&roleuser="+0+"&telephonenumberuser="+phone.getText().toString()+"&password="+pass.getText().toString()+"&imageuser="+image.getText().toString();
         req = new ConnectionRequest(url,false); 
 
           System.out.println(url);
         //Control saisi
-        if(name.getText().equals(" ")&& lastname.getText().equals(" ")&& email.getText().equals(" ")&&phone.getText().equals(" ")) {
+        if(name.getText().equals(" ")&& lastname.getText().equals(" ")&& email.getText().equals(" ")&&phone.getText().equals(" ")&&image.getText().equals(" ")) {
             
             Dialog.show("Erreur","Veuillez remplir les champs","OK",null);
             
@@ -274,7 +278,7 @@ return resultOK;
                 SessionManager.setEmail(email.getText().toString());
                 SessionManager.setTelephone(Long.parseLong(phone.getText().toString()));
                             SessionManager.setPassword(pass.getText().toString());
-
+      SessionManager.setProfilepicture(image.getText().toString());
             byte[]data = (byte[]) e.getMetaData();
             String responseData = new String(data);
             

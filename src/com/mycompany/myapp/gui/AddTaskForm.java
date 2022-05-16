@@ -16,6 +16,7 @@ import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BoxLayout;
 import com.mycompany.myapp.entities.Task;
 import com.mycompany.myapp.services.ServiceTask;
+import com.mycompany.myapp.utils.SessionManager;
   
 /**
  *
@@ -37,7 +38,7 @@ public class AddTaskForm extends Form {
                     Dialog.show("Alert", "Please fill all the fields", new Command("OK"));
                 } else {
                     try {
-                        Task t = new Task(tfName.getText().toString() ,52);
+                        Task t = new Task(tfName.getText().toString() , SessionManager.getId());
                         if (ServiceTask.getInstance().addTask(t)) {
                             Dialog.show("Success", "Connection accepted", new Command("OK"));
                         } else {

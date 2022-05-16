@@ -36,6 +36,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.text.ParseException;
 import java.util.ArrayList;
+import com.mycompany.myapp.utils.SessionManager;
+
 
 /**
  *
@@ -121,7 +123,7 @@ new ListCommentaire(e,c,previous).show();
 
                 } else {
                     try {
-                        Commentaire t = new Commentaire(tfName.getText().toString(),e.getIdpublication());
+                        Commentaire t = new Commentaire(tfName.getText().toString(),e.getIdpublication(),SessionManager.getId());
                         if (ServiceCommentaire.getInstance().addCommentaire(t)) {
                             Dialog.show("Success", "Connection accepted", new Command("OK"));
 new ListCommentaire(e,c,previous).show();

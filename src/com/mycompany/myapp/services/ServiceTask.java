@@ -67,8 +67,8 @@ public class ServiceTask {
 
     public boolean addTask(Task t) {
         System.out.println(t);
-        System.out.println("********");
-       String url = statics.BASE_URL + "liste/create?publication=" + t.getPublication();
+        System.out.println("******");
+       String url = statics.BASE_URL + "liste/create/"+t.getIduser()+"?publication=" + t.getPublication();
     
        req.setUrl(url);
        
@@ -103,17 +103,11 @@ public class ServiceTask {
                 Task t = new Task();
                 float id = Float.parseFloat(obj.get("idpublication").toString());
                 t.setIdpublication((int)id);
-                float idu = Float.parseFloat(obj.get("iduser").toString());
-                t.setIduser((int)id);
+        
                     t.setDatepublication(obj.get("datepublication").toString());
                     t.setPublication(obj.get("publication").toString());
                     t.setUsernamep(obj.get("usernamep").toString());
-                                    Button Delete = new Button("Delete");
-c3.add(Delete);
-                Delete.getAllStyles().setBgColor(0xF36B08);
-          //      addAll(c3);
-
-
+                    
                 tasks.add(t);
             }
             

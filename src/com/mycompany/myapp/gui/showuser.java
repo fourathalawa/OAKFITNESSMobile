@@ -21,6 +21,7 @@ import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BoxLayout;
 import com.mycompany.myapp.entities.User;
 import com.mycompany.myapp.services.Challengeservices;
+import com.mycompany.myapp.services.Salledesportservices;
 import com.mycompany.myapp.services.Userservices;
 import com.mycompany.myapp.utils.SessionManager;
 import java.io.IOException;
@@ -42,12 +43,15 @@ BaseForm current;
     setTitle("Profile User");
          SpanLabel sp = new SpanLabel();
            setLayout(BoxLayout.y());
-    String url1 = "http://127.0.0.1/Oakfitness/OAKFITNESSWEB/public/images";
- Form current;
+ String url = "http://localhost:8000/public/" + "images/" + SessionManager.getProfilepicture();
+         Form current;
   Container c3 = new Container(BoxLayout.y());
-              Image placeholder = Image.createImage(50, 30);
+         Image placeholder = Image.createImage(200, 200);
             EncodedImage enc = EncodedImage.createFromImage(placeholder, false);
-           
+            System.out.println(url);
+            URLImage urlim = URLImage.createToStorage(enc, SessionManager.getProfilepicture(), url);
+            ImageViewer imgV = new ImageViewer();
+            imgV.setImage(urlim);     
        /*  String img = SessionManager.getProfilepicture();
          System.out.println(img);
             ImageViewer imgV =null;
@@ -62,7 +66,7 @@ BaseForm current;
                 SpanLabel sp5 = new SpanLabel("image: " + "  " + SessionManager.getProfilepicture());
                 SpanLabel sp2 = new SpanLabel("password: " + "  " + SessionManager.getPassword());
         //  SpanLabel sp3 = new SpanLabel("date naissance: " + "  " + SessionManager.getDate());
-          addAll(spl,spl2,sp7,sp9,sp2);
+          addAll(imgV,spl,spl2,sp7,sp9,sp2);
           t.setNom(SessionManager.getName());
                     t.setPrenom(SessionManager.getLastname());
                     t.setMail(SessionManager.getEmail());
@@ -101,6 +105,7 @@ BaseForm current;
                 alert.showDialog();
 
             });
+            if(SessionManager.getRole()==0){
             Button addchallenge = new Button("MY New Challenge");
 
 addchallenge.addActionListener(new ActionListener() {
@@ -122,19 +127,35 @@ ch.getChallenge(SessionManager.getId());
                 System.out.println("done");
             }
         });
-                                        Button lModifier = new Button("Modifier");
-                                         
-            lModifier.addActionListener(ex -> new editUser().show());
-
   add(addchallenge);
     add(challenge);
        
+            }else if(SessionManager.getRole()==2){
+                Button salle = new Button("My Gyms");
+
+salle.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+Salledesportservices sal = new Salledesportservices();
+
+                new ShowGyms().show();
+                System.out.println("done");
+            }
+        });
+  add(salle);
+                
+            }
+                                        Button lModifier = new Button("Modifier");
+                                         
+            lModifier.addActionListener(ex -> new editUser().show());
+  Button log_out = new Button("Log OUT");
+  log_out.addActionListener(ex -> new Login().show());
+  
+
             add(Delete1);
             add(lModifier);
-
+            add(log_out);
        
   
 
-}
-
-}
+}}

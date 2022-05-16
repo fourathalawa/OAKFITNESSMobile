@@ -4,10 +4,14 @@
  */
 package com.mycompany.myapp.gui;
 
+import com.codename1.ext.filechooser.FileChooser;
 import com.codename1.ui.Button;
+import com.codename1.ui.CheckBox;
 import com.codename1.ui.Display;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
+import com.codename1.ui.Image;
+import com.codename1.ui.Label;
 import com.codename1.ui.TextField;
 import com.codename1.ui.Toolbar;
 import com.codename1.ui.events.ActionEvent;
@@ -46,7 +50,38 @@ public class editUser extends BaseForm {
        prenom=new TextField(SessionManager.getLastname(),"Last Name"); 
          phone=new TextField(String. valueOf(SessionManager.getTelephone()),"Phone number");
          email=new TextField(SessionManager.getEmail(),"Email");
-                password=new TextField(SessionManager.getPassword(),"Password");
+         TextField image =new TextField("", "image");
+        //choose file
+               CheckBox multiSelect = new CheckBox("Multi-select");
+
+        Button testImage = new Button("Browse Images");
+
+        testImage.addActionListener(e -> {
+            if (FileChooser.isAvailable()) {
+
+                FileChooser.showOpenDialog(multiSelect.isSelected(), ".pdf,application/pdf,.gif,image/gif,.png,image/png,.jpg,image/jpg,.tif,image/tif,.jpeg,.bmp", e2 -> {
+                    if (e2 != null && e2.getSource() != null) {
+
+                        String file = (String) e2.getSource();
+                        String pathLogo = file;
+                        String exx = file.substring(file.lastIndexOf("."));
+                        System.out.println(pathLogo);
+                        image.setText(pathLogo);
+                        System.out.println("path :" + pathLogo + " extension :" + exx);
+
+                        try {
+                            Image img = Image.createImage(file);
+                            this.add(new Label(img));
+                            this.revalidate();
+                        } catch (Exception ex) {
+
+                        }
+
+                    }
+                });
+            }
+        });
+      password = new TextField("", "Password", 20, TextField.PASSWORD);
 
     
         Button btnupd=new Button("Profile edit");
@@ -61,10 +96,10 @@ public class editUser extends BaseForm {
              session.setEmail(email.getText().toString());
              session.setTelephone(Long.parseLong(phone.getText().toString()));
                     session.setPassword(password.getText().toString());
-                    Userservices.getInstance().editUser(nom,prenom,email,phone,password);
+                    Userservices.getInstance().editUser(nom,prenom,email,phone,password,image);
                 }
         });
-        addAll(nom,prenom,email,phone,password,btnupd);
+        addAll(nom,prenom,email,phone,password,image,testImage,btnupd);
     }
     
 }

@@ -11,9 +11,11 @@ package com.mycompany.myapp.gui;
 
 
 import com.codename1.capture.Capture;
+import com.codename1.ext.filechooser.FileChooser;
 import com.codename1.io.FileSystemStorage;
 import com.codename1.io.Log;
 import com.codename1.ui.Button;
+import com.codename1.ui.CheckBox;
 
 import static com.codename1.ui.Component.LEFT;
 
@@ -41,7 +43,6 @@ import com.codename1.ui.util.ImageIO;
 import com.codename1.ui.util.Resources;
 import com.mycompany.myapp.entities.User;
 import com.mycompany.myapp.services.Userservices;
-import com.mycompany.myapp.gui.BaseForm;
 import static com.sun.javafx.fxml.expression.Expression.add;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -84,13 +85,43 @@ public class SignUp extends BaseForm {
         lastnameLabel.setVisible(false);
         Label emailLabel= new Label("Enter a correct email","ControlLabel");
         emailLabel.setVisible(false);
-        
+         TextField image =new TextField("", "image");
+        //choose file
+               CheckBox multiSelect = new CheckBox("Multi-select");
+
+        Button testImage = new Button("Browse Images");
+
+        testImage.addActionListener(e -> {
+            if (FileChooser.isAvailable()) {
+
+                FileChooser.showOpenDialog(multiSelect.isSelected(), ".pdf,application/pdf,.gif,image/gif,.png,image/png,.jpg,image/jpg,.tif,image/tif,.jpeg,.bmp", e2 -> {
+                    if (e2 != null && e2.getSource() != null) {
+
+                        String file = (String) e2.getSource();
+                        String pathLogo = file;
+                        String exx = file.substring(file.lastIndexOf("."));
+                        System.out.println(pathLogo);
+                        image.setText(pathLogo);
+                        System.out.println("path :" + pathLogo + " extension :" + exx);
+
+                        try {
+                            Image img = Image.createImage(file);
+                            this.add(new Label(img));
+                            this.revalidate();
+                        } catch (Exception ex) {
+
+                        }
+
+                    }
+                });
+            }
+        });
         Button signup = new Button ("Sign Up");
          signup.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 Userservices us=new Userservices();
-                us.addUser(name,lastname,email,phone,date,password);
+                us.addUser(name,lastname,email,phone,date,password,image);
                
             }
         });
@@ -109,7 +140,8 @@ public class SignUp extends BaseForm {
                                 BorderLayout.center(date),
                 passwordLabel,      
                 BorderLayout.center(password),
-           
+           image,
+           testImage,
                signup
 
         );
